@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELEVÉ - Where Street Meets Sleek</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --sage-green: #9CAF88;
+            --soft-coral: #FF8A80;
+            --muted-purple: #B39DDB;
+            --warm-beige: #F5E6D3;
+            --charcoal: #2C2C2C;
+            --off-white: #FAFAFA;
+            --light-gray: #F8F9FA;
+            --medium-gray: #6C757D;
+            --dark-gray: #343A40;
+            --accent-blue: #7B9BFF;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--off-white);
+            color: var(--charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Subtle background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(156, 175, 136, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 138, 128, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(179, 157, 219, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.2rem 2rem;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(44, 44, 44, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            letter-spacing: -0.5px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--sage-green);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -8px;
+            left: 50%;
+            background: var(--sage-green);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-cta {
+            background: var(--charcoal);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-cta:hover {
+            background: var(--sage-green);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 0 2rem;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--charcoal);
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+        
+        .hero-highlight {
+            background: linear-gradient(135deg, var(--sage-green), var(--muted-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            color: var(--medium-gray);
+            font-weight: 400;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1.2rem 2.5rem;
+            background: var(--charcoal);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(44, 44, 44, 0.2);
+        }
+        
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s;
+        }
+        
+        .hero-cta:hover::before {
+            left: 100%;
+        }
+        
+        /* Floating elements - more subtle */
+        .hero-decoration {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sage-green), transparent);
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .hero-decoration:nth-child(1) {
+            top: 15%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .hero-decoration:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            background: linear-gradient(135deg, var(--soft-coral), transparent);
+            animation-delay: 3s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-30px) scale(1.1); }
+        }
+        
+        /* Section styles */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--medium-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Featured Drop */
+        .featured-drop {
+            background: var(--light-gray);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-drop::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sage-green), var(--muted-purple), var(--soft-coral));
+        }
+        
+        .drop-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .drop-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+        }
+        
+        .drop-text p {
+            font-size: 1.1rem;
+            color: var(--medium-gray);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        
+        .drop-cta {
+            background: var(--sage-green);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .drop-cta:hover {
+            background: var(--charcoal);
+            transform: translateY(-2px);
+        }
+        
+        .drop-visual {
+            height: 300px;
+            background: linear-gradient(135deg, var(--muted-purple), var(--sage-green));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+        
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(44, 44, 44, 0.06);
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(44, 44, 44, 0.1);
+        }
+        
+        .product-image {
+            height: 280px;
+            background: linear-gradient(135deg, var(--sage-green), var(--muted-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card:nth-child(even) .product-image {
+            background: linear-gradient(135deg, var(--soft-coral), var(--accent-blue));
+        }
+        
+        .product-info {
+            padding: 2rem;
+        }
+        
+        .product-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--charcoal);
+        }
+        
+        .product-price {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--sage-green);
+            margin-bottom: 1rem;
+        }
+        
+        .product-tags {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: var(--light-gray);
+            color: var(--medium-gray);
+            padding: 0.4rem 1rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        /* Collection filters */
+        .collection-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--light-gray);
+            color: var(--medium-gray);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--charcoal);
+            color: white;
+            border-color: var(--charcoal);
+            transform: translateY(-2px);
+        }
+        
+        /* Social section */
+        .social-section {
+            background: var(--charcoal);
+            color: white;
+            border-radius: 30px;
+            padding: 4rem 3rem;
+            text-align: center;
+        }
+        
+        .social-section .section-title {
+            color: white;
+        }
+        
+        .social-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .social-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .social-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--sage-green);
+        }
+        
+        .social-card h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+        
+        .social-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+        
+        /* Newsletter section */
+        .newsletter {
+            background: linear-gradient(135deg, var(--sage-green), var(--muted-purple));
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 30px;
+            margin: 3rem 0;
+        }
+        
+        .newsletter h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 1.2rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .newsletter-btn {
+            background: var(--charcoal);
+            color: white;
+            border: none;
+            padding: 1.2rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .newsletter-btn:hover {
+            background: rgba(44, 44, 44, 0.8);
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: white;
+            padding: 4rem 2rem 2rem;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--sage-green);
+        }
+        
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .section {
+                padding: 3rem 1rem;
+            }
+            
+            .drop-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .collection-filters {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-btn {
+                width: 250px;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Loading animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">ELEVÉ</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#collections">Collections</a></li>
+                <li><a href="#men">Men</a></li>
+                <li><a href="#women">Women</a></li>
+                <li><a href="#community">Community</a></li>
+            </ul>
+            <a href="#early-access" class="nav-cta">Early Access</a>
+        </div>
+    </nav>
+    
+    <section id="home" class="hero">
+        <div class="hero-decoration"></div>
+        <div class="hero-decoration"></div>
+        <div class="hero-content">
+            <h1>Where Street <span class="hero-highlight">Meets</span> Sleek</h1>
+            <p>Curated streetwear that speaks your language. Bold, authentic, effortlessly refined. Because your style deserves more than ordinary.</p>
+            <a href="#featured" class="hero-cta">
+                <span>Discover the Drop</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+    
+    <section id="featured" class="section">
+        <div class="featured-drop fade-in">
+            <div class="drop-content">
+                <div class="drop-text">
+                    <h3>Mood Manifest Collection</h3>
+                    <p>Limited drop featuring our most requested pieces. Oversized fits meet clean aesthetics in this confidence-boosting collection that's already breaking the internet.</p>
+                    <a href="#shop" class="drop-cta">Shop the Moment 🔥</a>
+                </div>
+                <div class="drop-visual">✨</div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="collections" class="section">
+        <div class="section-header">
+            <h2 class="section-title">Current Collections</h2>
+            <p class="section-subtitle">Handpicked pieces that define the moment. Each collection tells a story of confidence, creativity, and authentic self-expression.</p>
+        </div>
+        
+        <div class="collection-filters">
+            <button class="filter-btn active" data-filter="all">All Styles</button>
+            <button class="filter-btn" data-filter="oversized">Oversized Energy</button>
+            <button class="filter-btn" data-filter="minimalist">Clean Aesthetic</button>
+            <button class="filter-btn" data-filter="statement">Statement Pieces</button>
+        </div>
+        
+        <div class="product-grid">
+            <div class="product-card fade-in" data-category="oversized statement">
+                <div class="product-image">🧥</div>
+                <div class="product-info">
+                    <h3 class="product-title">Confidence Codec Jacket</h3>
+                    <div class="product-price">$149</div>
+                    <div class="product-tags">
+                        <span class="tag">Oversized</span>
+                        <span class="tag">Unisex</span>
+                        <span class="tag">Limited</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card fade-in" data-category="minimalist">
+                <div class="product-image">👕</div>
+                <div class="product-info">
+                    <h3 class="product-title">Unbothered Babe Tee</h3>
+                    <div class="product-price">$65</div>
+                    <div class="product-tags">
+                        <span class="tag">Essential</span>
+                        <span class="tag">Soft Cotton</span>
+                        <span class="tag">Clean</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card fade-in" data-category="oversized">
+                <div class="product-image">👖</div>
+                <div class="product-info">
+                    <h3 class="product-title">Vibe Architect Pants</h3>
+                    <div class="product-price">$95</div>
+                    <div class="product-tags">
+                        <span class="tag">Relaxed Fit</span>
+                        <span class="tag">Cargo Style</span>
+                        <span class="tag">Street</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card fade-in" data-category="statement">
+                <div class="product-image">🎽</div>
+                <div class="product-info">
+                    <h3 class="product-title">Aesthetic Anarchy Crop</h3>
+                    <div class="product-price">$55</div>
+                    <div class="product-tags">
+                        <span class="tag">Cropped</span>
+                        <span class="tag">Bold</span>
+                        <span class="tag">Trending</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card fade-in" data-category="minimalist oversized">
+                <div class="product-image">🩳</div>
+                <div class="product-info">
+                    <h3 class="product-title">Trend Disruptor Shorts</h3>
+                    <div class="product-price">$75</div>
+                    <div class="product-tags">
+                        <span class="tag">Relaxed</span>
+                        <span class="tag">Premium</span>
+                        <span class="tag">Versatile</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card fade-in" data-category="statement">
+                <div class="product-image">👗</div>
+                <div class="product-info">
+                    <h3 class="product-title">Main Character Dress</h3>
+                    <div class="product-price">$89</div>
+                    <div class="product-tags">
+                        <span class="tag">Midi Length</span>
+                        <span class="tag">Effortless</span>
+                        <span class="tag">Chic</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="fit-week" class="section">
+        <div class="section-header">
+            <h2 class="section-title">Fit of the Week</h2>
+            <p class="section-subtitle">Curated looks that are setting the tone. Real fits from real people living their best lives.</p>
+        </div>
+        
+        <div class="featured-drop">
+            <div class="drop-content">
+                <div class="drop-text">
+                    <h3>@maya.styles in the Mood Manifest Set</h3>
+                    <p>"This fit literally changed my confidence level. The oversized jacket with the clean lines? *Chef's kiss* Pure main character energy." - Maya, 22, Creative Director</p>
+                    <a href="#" class="drop-cta">Get the Look</a>
+                </div>
+                <div class="drop-visual">📸</div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="community" class="section">
+        <div class="social-section">
+            <div class="section-header">
+                <h2 class="section-title">Style Stories</h2>
+                <p class="section-subtitle">Join the community that's redefining streetwear culture. Your style, your story, your moment.</p>
+            </div>
+            
+            <div class="social-grid">
+                <div class="social-card">
+                    <div class="social-icon"><i class="fab fa-instagram"></i></div>
+                    <h4>@elevé.style</h4>
+                    <p>Daily style inspiration and behind-the-scenes content that hits different</p>
+                </div>
+                
+                <div class="social-card">
+                    <div class="social-icon"><i class="fab fa-tiktok"></i></div>
+                    <h4>Style Tutorials</h4>
+                    <p>Quick styling tips and trend breakdowns that actually make sense</p>
+                </div>
+                
+                <div class="social-card">
+                    <div class="social-icon"><i class="fas fa-users"></i></div>
+                    <h4>Community Lookbook</h4>
+                    <p>Real customers, real fits, real confidence. Submit your look for a chance to be featured</p>
+                </div>
+                
+                <div class="social-card">
+                    <div class="social-icon"><i class="fas fa-bolt"></i></div>
+                    <h4>Drop Alerts</h4>
+                    <p>Be first to know about new releases, restocks, and exclusive early access</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="early-access" class="section">
+        <div class="newsletter">
+            <h3>Own the Moment</h3>
+            <p>Join the insider list for early drops, exclusive content, and that main character energy you've been looking for ✨</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email">
+                <button type="submit" class="newsletter-btn">Get Early Access</button>
+            </form>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Shop</h4>
+                <a href="#">New Arrivals</a>
+                <a href="#">Men's Collection</a>
+                <a href="#">Women's Collection</a>
+                <a href="#">Sale</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Support</h4>
+                <a href="#">Size Guide</a>
+                <a href="#">Shipping Info</a>
+                <a href="#">Returns</a>
+                <a href="#">Contact Us</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="#">About ELEVÉ</a>
+                <a href="#">Careers</a>
